@@ -1,0 +1,53 @@
+import java.lang.Math;
+
+class eloelobenc_zadanie_drzewo_sadzenie {
+    public static void main(String[] args) {
+        int wynik;
+
+        Node root = new Node(), a = new Node(), b = new Node(), c = new Node(), d = new Node(), e = new Node(), f = new Node();
+        root.setLeft(a);
+        root.vl = 8;
+        root.setRight(b);
+        root.vr = 4;
+
+        a.setLeft(c);
+        a.vl = 6;
+        a.setRight(d);
+        a.vr = 3;
+
+        b.setLeft(e);
+        b.vl = 0;
+        b.setRight(f);
+        b.vr = 12;
+
+        c.vl = 0; c.vr = 0;  d.vl = 0; d.vr = 0;  e.vl = 0; e.vr = 0;  f.vl = 0; f.vr = 0;
+        int n = 100000000;
+        Node.BFS(root, 2, 0,  n);
+    }
+    public static class Node {
+        Node left = null;
+        Node right = null;
+        int vl = 0, vr = 0;
+
+        public Node(){};
+
+        public void setLeft(Node left) {
+            this.left = left;
+        }
+
+        public void setRight(Node right) {
+            this.right = right;
+        }
+
+        public static int BFS(Node root, int height, int suma, int wynik) {
+            if (height == 0) {
+                wynik = Math.min(suma, wynik);
+                return 0;
+            }
+            BFS(root.left, height - 1, suma + root.vl, wynik);
+            BFS(root.right, height - 1, suma + root.vr, wynik);
+            return wynik;
+        }
+    }
+}
+
